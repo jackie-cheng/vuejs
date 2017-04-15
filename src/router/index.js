@@ -1,0 +1,102 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '../pages/Home'
+import TabBar from '../components/TabBar'
+
+Vue.use(Router)
+
+export default new Router({
+  linkActiveClass:"is-active",
+  routes: [
+      {
+        path:"/",
+        component:TabBar,
+        redirect:"/home",
+        children:[
+          {path:'home',component:Home},
+          {
+            path:"share",
+            component:resolve=>{
+               require(['../pages/Share'],resolve)
+             }
+           },
+           {
+              path:"askanswer",
+              component:resolve=>{
+                require(['../pages/AskAnswer'],resolve)
+              }
+            },
+            {
+              path:"job",
+              component:resolve=>{
+                require(['../pages/Job'],resolve)
+              }
+            }
+        ]
+      },
+      {
+        path:'/user',
+        component:resolve=>{
+          require(['../pages/User'],resolve)
+        }
+      },
+      {
+        path:'/login',
+        component:resolve=>{
+          require(['../pages/Login'],resolve)
+        }
+      },
+      {
+        path:'/detail/:id',
+        component:resolve=>{
+          require(['../pages/Detail'],resolve)
+        }
+      },
+      {
+        path:'/comment/:topicId/:replyId',
+        component:resolve=>{
+          require(['../pages/Comment'],resolve)
+        }
+      },
+      {
+        path:'/commentauthor/:topicId',
+        component:resolve=>{
+          require(['../pages/CommentAuthor'],resolve)
+        }
+      },
+      {
+        path:'/user/mytopics',
+        component:resolve=>{
+          require(['../pages/MyTopics'],resolve)
+        }
+      },
+      {
+        path:'/user/jointopics',
+        component:resolve=>{
+          require(['../pages/JoinTopics'],resolve)
+        }
+      },
+      {
+        path:'/user/mycollect',
+        component:resolve=>{
+          require(['../pages/MyCollect'],resolve)
+        }
+      },
+      {
+        path:'/user/weidu',
+        component:resolve=>{
+          require(['../pages/WeiDuMessage'],resolve)
+        }
+      },
+      {
+        path:'/fabu',
+        component:resolve=>{
+          require(['../pages/FaBu'],resolve)
+        }
+      },
+      {
+        path:"*",
+        redirect:"/"
+      }
+  ]
+})
